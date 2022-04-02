@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">QuanLyKho</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nhap_kho_bt">NHẬP KHO</string>
+    <string name="thong_tin_kho_bt">THÔNG TIN KHO</string>
+    <string name="danh_sach_vat_tu_bt">DANH SÁCH VẬT TƯ</string>
+    <string name="lich_su_nhap_kho_bt">LỊCH SỬ NHẬP KHO</string>
+    <string name="thoat_bt">THOÁT</string>
+    <string name="save_receipt_button">LƯU PHIẾU</string>
+    <string name="warehouse_text">KHO</string>
+    <string name="supplies_list_text">DANH SÁCH VẬT TƯ</string>
+    <string name="add_icon_desc">ADD</string>
+    <string name="minus_icon_desc">XÓA</string>
+</resources>
