@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_baseline_dashboard_48"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_receipt"
+            android:icon="@drawable/ic_baseline_receipt_48"
+            android:title="Nhập kho" />
+        <item
+            android:id="@+id/nav_export"
+            android:icon="@drawable/ic_baseline_export_48"
+            android:title="Xuất kho" />
+        <item
+            android:id="@+id/nav_warehouse"
+            android:icon="@drawable/ic_baseline_warehouse_48"
+            android:title="Thông tin kho" />
+        <item
+            android:id="@+id/nav_supplies"
+            android:icon="@drawable/ic_baseline_supplies_48"
+            android:title="Danh sách vật tư" />
+        <item
+            android:id="@+id/nav_history"
+            android:icon="@drawable/ic_baseline_history_48"
+            android:title="Lịch sử nhập xuất" />
+        <item
+            android:id="@+id/nav_quit"
+            android:icon="@drawable/ic_baseline_quit_48"
+            android:title="Thoát" />
+    </group>
+
+</menu>
