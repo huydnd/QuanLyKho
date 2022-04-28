@@ -14,6 +14,11 @@ public class Warehouse {
 		this.warehouseAddress = warehouseAddress;
 	}
 
+	public Warehouse(String warehouseName, String warehouseAddress) {
+		this.warehouseName = warehouseName;
+		this.warehouseAddress = warehouseAddress;
+	}
+
 	public int getWarehouseId() {
 		return warehouseId;
 	}

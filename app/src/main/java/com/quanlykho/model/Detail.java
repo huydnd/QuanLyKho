@@ -37,4 +37,13 @@ public class Detail {
 	public void setDetailAmount(int detailAmount) {
 		this.detailAmount = detailAmount;
 	}
+
+	@Override
+	public String toString() {
+		return "Detail{" +
+				"detailSuppliesId=" + detailSuppliesId +
+				", detailReceiptId=" + detailReceiptId +
+				", detailAmount=" + detailAmount +
+				'}';
+	}
 }

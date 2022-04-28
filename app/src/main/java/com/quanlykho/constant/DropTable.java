@@ -10,6 +10,13 @@ public class DropTable {
 	public static String DROP_RECEIPT_TABLE
 			= "DROP TABLE IF EXISTS " + Constants.RECEIPT_TABLE;
 
+	public static String DROP_EXPORT_TABLE
+			= "DROP TABLE IF EXISTS " + Constants.EXPORT_TABLE;
+
 	public static String DROP_DETAIL_TABLE
 			= "DROP TABLE IF EXISTS " + Constants.DETAIL_TABLE;
+
+	public static String DROP_EXDETAIL_TABLE
+			= "DROP TABLE IF EXISTS " + Constants.EXDETAIL_TABLE;
+
 }

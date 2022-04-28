@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_user_info"
+            android:icon="@drawable/icons8_customer_48"
+            android:title="@string/thong_tin_nguoi_dung" />
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/icons8_google_maps_48"
+            android:title="@string/tra_cuu_google_map" />
+        <item
+            android:id="@+id/nav_language"
+            android:icon="@drawable/icons8_language_skill_48"
+            android:title="@string/ngon_ngu"
+            app:actionLayout="@layout/language_toggle_button"/>
+        <item
+            android:id="@+id/nav_logut"
+            android:icon="@drawable/icons8_logout_48"
+            android:title="@string/dang_xuat" />
+    </group>
+</menu>

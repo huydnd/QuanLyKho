@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "916133035633",
+    "project_id": "warehouse-management-pro-c5dd5",
+    "storage_bucket": "warehouse-management-pro-c5dd5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:916133035633:android:9af0956deaf001012725d0",
+        "android_client_info": {
+          "package_name": "com.quanlykho"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "916133035633-21s7e9196r5umehs2tq358a6sp82o10g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6L8fJ08mOJDFaFdJKICK-DN12qbFA6-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "916133035633-21s7e9196r5umehs2tq358a6sp82o10g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
