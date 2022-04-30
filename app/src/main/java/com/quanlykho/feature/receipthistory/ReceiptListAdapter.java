@@ -1,6 +1,7 @@
-package com.quanlykho.feature.receipt;
+package com.quanlykho.feature.receipthistory;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,23 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.quanlykho.R;
+import com.quanlykho.database.QueryResponse;
+import com.quanlykho.database.dao.DAO;
+import com.quanlykho.database.dao.DetailQuery;
+import com.quanlykho.database.dao.WarehouseQuery;
+import com.quanlykho.model.Detail;
 import com.quanlykho.model.Receipt;
+import com.quanlykho.model.Warehouse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReceiptListAdapter extends BaseAdapter {
+
+	private ArrayList<Warehouse> warehouses=new ArrayList<Warehouse>();
+	private DAO.WarehouseQuery warehouseQuery=new WarehouseQuery();
+	private ArrayList<Detail> details=new ArrayList<Detail>();
+	private DAO.DetailQuery detailQuery=new DetailQuery();
 
 	private final Context context;
 	private final int layout;
@@ -59,8 +72,26 @@ public class ReceiptListAdapter extends BaseAdapter {
 			viewHolder= (ViewHolder) view.getTag();
 		}
 		Receipt receipt = receiptList.get(i);
-		viewHolder.warehouseNameTextView.setText(receipt.getReceiptWarehouseId());
-		viewHolder.countSuppliesTextView.setText(receipt.getReceiptWarehouseId());
+		warehouseQuery.readWarehouse(receipt.getReceiptWarehouseId(), new QueryResponse<Warehouse>() {
+			@Override
+			public void onSuccess(Warehouse data) {
+				viewHolder.warehouseNameTextView.setText(data.getWarehouseName());
+			}
+			@Override
+			public void onFailure(String message) {
+
+			}
+		});
+		detailQuery.readAllDetailFromReceipt(receipt.getReceiptId(), new QueryResponse<List<Detail>>() {
+			@Override
+			public void onSuccess(List<Detail> data) {
+				Log.d("TESTDETAIL","3: "+ data.size());
+				viewHolder.countSuppliesTextView.setText(String.valueOf(data.size()));
+			}
+			@Override
+			public void onFailure(String message) {
+			}
+		});
 		viewHolder.receiptDateTextView.setText(receipt.getReceiptDate());
 		return view;
 	}

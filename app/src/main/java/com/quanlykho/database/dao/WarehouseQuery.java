@@ -1,14 +1,18 @@
 package com.quanlykho.database.dao;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.quanlykho.constant.Constants;
 import com.quanlykho.database.QueryResponse;
 import com.quanlykho.database.SQLiteDatabaseHelper;
+import com.quanlykho.model.Supplies;
+import com.quanlykho.model.SuppliesDetail;
 import com.quanlykho.model.Warehouse;
 import com.quanlykho.util.App;
 
@@ -17,23 +21,6 @@ import java.util.List;
 
 public class WarehouseQuery implements DAO.WarehouseQuery {
 	private final SQLiteDatabaseHelper databaseHelper = SQLiteDatabaseHelper.getInstance();
-
-	@Override
-	public void createWarehouse(Warehouse warehouse, QueryResponse<Boolean> response) {
-		try (SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase()) {
-			ContentValues contentValues = getContentValuesForWarehouse(warehouse);
-			long id = sqLiteDatabase.insertOrThrow(Constants.WAREHOUSE_TABLE, null, contentValues);
-			if (id > 0) {
-				response.onSuccess(true);
-				warehouse.setWarehouseId((int) id);
-				Toast.makeText(App.context, "Tạo kho thành công. Mã kho: "+warehouse.getWarehouseId(), Toast.LENGTH_LONG).show();
-			} else
-				response.onFailure("Không thể tạo được nhà kho mới. Vui lòng kiểm tra lại thông tin");
-		} catch (SQLiteException e) {
-			response.onFailure(e.getMessage());
-		}
-	}
-
 	private ContentValues getContentValuesForWarehouse(Warehouse warehouse) {
 
 		ContentValues contentValues = new ContentValues();
@@ -43,10 +30,25 @@ public class WarehouseQuery implements DAO.WarehouseQuery {
 
 		return contentValues;
 	}
+	@Override
+	public void createWarehouse(Context context,Warehouse warehouse, QueryResponse<Boolean> response) {
+		try(SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase()) {
+			ContentValues contentValues = getContentValuesForWarehouse(warehouse);
+			long id = sqLiteDatabase.insertOrThrow(Constants.WAREHOUSE_TABLE, null, contentValues);
+			if (id > 0) {
+				response.onSuccess(true);
+				warehouse.setWarehouseId((int) id);
+				Toast.makeText(context, "Tạo kho thành công. Mã kho: "+warehouse.getWarehouseId(), Toast.LENGTH_LONG).show();
+			} else
+				response.onFailure("Không thể tạo được nhà kho mới. Vui lòng kiểm tra lại thông tin");
+		} catch (SQLiteException e) {
+			response.onFailure(e.getMessage());
+		}
+	}
 
 	@Override
 	public void readWarehouse(int WarehouseID, QueryResponse<Warehouse> response) {
-		SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+		android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 		Cursor cursor = null;
 		try {
 			cursor = sqLiteDatabase.query(Constants.WAREHOUSE_TABLE, null,
@@ -68,10 +70,33 @@ public class WarehouseQuery implements DAO.WarehouseQuery {
 		}
 	}
 
+	@Override
+	public void readWarehouseByName(String WarehouseName, QueryResponse<Warehouse> response) {
+		android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+		Cursor cursor = null;
+		try {
+			cursor = sqLiteDatabase.query(Constants.WAREHOUSE_TABLE, null,
+					Constants.WAREHOUSE_NAME + " =? ", new String[]{String.valueOf(WarehouseName)},
+					null, null, null,null);
+			if(cursor!=null && cursor.moveToFirst()) {
+				Warehouse warehouse = getWarehouseFromCursor(cursor);
+				response.onSuccess(warehouse);
+			}
+			else
+				response.onFailure("Không tìm thấy nhà kho này trong database");
+
+		} catch (Exception e){
+			response.onFailure(e.getMessage());
+		} finally {
+			sqLiteDatabase.close();
+			if(cursor!=null)
+				cursor.close();
+		}
+	}
 
 	@Override
 	public void readAllWarehouse(QueryResponse<List<Warehouse>> response) {
-		SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+		android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 		List<Warehouse> warehousesList = new ArrayList<>();
 
 		Cursor cursor = null;
@@ -85,7 +110,71 @@ public class WarehouseQuery implements DAO.WarehouseQuery {
 
 				response.onSuccess(warehousesList);
 			} else
-				response.onFailure("Không có nhà kho nào cả");
+				response.onFailure("Không tồn tại kho trong cơ sở dữ liệu");
+		}catch (Exception e){
+			response.onFailure(e.getMessage());
+		} finally {
+			sqLiteDatabase.close();
+			if(cursor!=null)
+				cursor.close();
+		}
+	}
+
+	@Override
+	public void readAllDetailByWarehouseName(String warehouseName, QueryResponse<List<SuppliesDetail>> response ){
+		android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+		List<SuppliesDetail> suppliesDetailList = new ArrayList<>();
+
+		Cursor cursor = null;
+		try{
+			cursor = sqLiteDatabase.rawQuery("SELECT Supplies.SuppliesName , sum(Detail.DetailAmount) as DetailAmount, Supplies.SuppliesUnit\n" +
+					"From Detail JOIN Supplies ON Detail.Detail_SuppliesId = Supplies.SuppliesId\n" +
+					"JOIN Receipt ON Detail.Detail_ReceiptId = Receipt.ReceiptId\n" +
+					"JOIN Warehouse ON Receipt.Receipt_WarehouseId = Warehouse.WarehouseId \n" +
+					"AND Warehouse.WarehouseName= ? \n" +
+					"GROUP BY Supplies.SuppliesName",new String[]{warehouseName});
+			if(cursor!=null && cursor.moveToFirst()){
+				do {
+					SuppliesDetail suppliesDetail = getSuppliesDetailInWarehouseFromCursor(cursor);
+					suppliesDetailList.add(suppliesDetail);
+				} while (cursor.moveToNext());
+				Log.d("HELLO", "So luong deetail="+suppliesDetailList.size());
+				response.onSuccess(suppliesDetailList);
+			} else
+				Log.d("HELLO", "So luong deetail="+suppliesDetailList.size());
+				response.onFailure("Không tồn tại vật tư trong kho");
+		}catch (Exception e){
+			response.onFailure(e.getMessage());
+		} finally {
+			sqLiteDatabase.close();
+			if(cursor!=null)
+				cursor.close();
+		}
+	}
+
+	@Override
+	public void readAllExDetailByWarehouseName(String warehouseName, QueryResponse<List<SuppliesDetail>> response ){
+		android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+		List<SuppliesDetail> suppliesDetailList = new ArrayList<>();
+
+		Cursor cursor = null;
+		try{
+			cursor = sqLiteDatabase.rawQuery("SELECT Supplies.SuppliesName , sum(ExDetail.ExDetailAmount) as DetailAmount, Supplies.SuppliesUnit\n" +
+					"From ExDetail JOIN Supplies ON ExDetail.ExDetail_SuppliesId = Supplies.SuppliesId\n" +
+					"JOIN Export ON ExDetail.ExDetail_ExportId = Export.ExportId\n" +
+					"JOIN Warehouse ON Export.Export_WarehouseId = Warehouse.WarehouseId \n" +
+					"AND Warehouse.WarehouseName= ? \n" +
+					"GROUP BY Supplies.SuppliesName",new String[]{warehouseName});
+			if(cursor!=null && cursor.moveToFirst()){
+				do {
+					SuppliesDetail suppliesDetail = getSuppliesDetailInWarehouseFromCursor(cursor);
+					suppliesDetailList.add(suppliesDetail);
+				} while (cursor.moveToNext());
+				Log.d("HELLO", "So luong deetail="+suppliesDetailList.size());
+				response.onSuccess(suppliesDetailList);
+			} else
+				Log.d("HELLO", "So luong deetail="+suppliesDetailList.size());
+			response.onFailure("Không tồn tại vật tư trong kho");
 		}catch (Exception e){
 			response.onFailure(e.getMessage());
 		} finally {
@@ -97,7 +186,7 @@ public class WarehouseQuery implements DAO.WarehouseQuery {
 
 	@Override
 	public void anyWarehouseCreated(QueryResponse<Boolean> response){
-		SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+		android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 		boolean empty = true;
 		Cursor cursor = sqLiteDatabase.rawQuery("SELECT COUNT(*) FROM "+Constants.WAREHOUSE_TABLE, null);
 		if (cursor != null && cursor.moveToFirst()) {
@@ -114,7 +203,7 @@ public class WarehouseQuery implements DAO.WarehouseQuery {
 
 	@Override
 	public void updateWarehouse(Warehouse warehouse, QueryResponse<Boolean> response) {
-		SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+		android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 		String id = String.valueOf(warehouse.getWarehouseId());
 		ContentValues contentValues = getContentValuesForWarehouse(warehouse);
 		int row = sqLiteDatabase.update(Constants.WAREHOUSE_TABLE,
@@ -132,9 +221,22 @@ public class WarehouseQuery implements DAO.WarehouseQuery {
 
 	@Override
 	public void deleteWarehouse(int WarehouseID, QueryResponse<Boolean> response) {
-		SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+		android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 		int row = sqLiteDatabase.delete(Constants.WAREHOUSE_TABLE, Constants.WAREHOUSE_ID+" = ?",new String[]{String.valueOf(WarehouseID)});
 
+		if(row>0){
+			response.onSuccess(true);
+			Toast.makeText(App.context, "Đã xóa kho", Toast.LENGTH_LONG).show();
+		}
+		else{
+			response.onFailure("Không thể xóa kho này");
+		}
+	}
+
+	@Override
+	public void deleteWarehouseByName(String WarehouseName, QueryResponse<Boolean> response) {
+		android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+		int row = sqLiteDatabase.delete(Constants.WAREHOUSE_TABLE, Constants.WAREHOUSE_NAME+" = ?",new String[]{String.valueOf(WarehouseName)});
 		if(row>0){
 			response.onSuccess(true);
 			Toast.makeText(App.context, "Đã xóa kho", Toast.LENGTH_LONG).show();
@@ -150,4 +252,12 @@ public class WarehouseQuery implements DAO.WarehouseQuery {
 		String address = cursor.getString(cursor.getColumnIndexOrThrow(Constants.WAREHOUSE_ADDRESS));
 		return new Warehouse(id, name, address);
 	}
+
+	private SuppliesDetail getSuppliesDetailInWarehouseFromCursor(Cursor cursor){
+		String suppliesName = cursor.getString(cursor.getColumnIndexOrThrow(Constants.SUPPLIES_NAME));
+		int detailAmount = cursor.getInt(cursor.getColumnIndexOrThrow(Constants.DETAIL_AMOUNT));
+		String suppliesUnit = cursor.getString(cursor.getColumnIndexOrThrow(Constants.SUPPLIES_UNIT));
+		return new SuppliesDetail(suppliesName, detailAmount, suppliesUnit);
+	}
+
 }

@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.quanlykho">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
+        android:name=".util.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,27 +14,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyKho">
         <activity
-            android:name=".feature.receipt.ReceiptHistoryActivity">
-        </activity>
+            android:name=".feature.exportHistory.ExportHistoryActivity"
+            android:exported="false" />
         <activity
-            android:name=".feature.supplies.SuppliesActivity">
-        </activity>
-        <activity
-            android:name=".feature.warehouse.WarehouseActivity">
-        </activity>
+            android:name=".feature.export.ExportActivity"
+            android:exported="false" />
+        <activity android:name=".feature.receipthistory.ReceiptHistoryActivity"></activity>
+        <activity android:name=".feature.supplies.SuppliesActivity"></activity>
+        <activity android:name=".feature.warehouse.WarehouseActivity"></activity>
         <activity
             android:name=".feature.receipt.ReceiptActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SHOW_APP_INFO" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".feature.dashboard.DashboardActivity"
-            android:exported="false">
+            android:theme="@style/Theme.QuanLyKho.NoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SHOW_APP_INFO" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -40,6 +47,7 @@
             android:theme="@style/Theme.QuanLyKho.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

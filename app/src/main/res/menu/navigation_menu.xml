@@ -28,6 +28,10 @@
             android:icon="@drawable/ic_baseline_history_48"
             android:title="Lịch sử nhập xuất" />
         <item
+            android:id="@+id/nav_ex_history"
+            android:icon="@drawable/ic_baseline_access_time_filled_48"
+            android:title="Lịch sử xuất kho" />
+        <item
             android:id="@+id/nav_quit"
             android:icon="@drawable/ic_baseline_quit_48"
             android:title="Thoát" />

@@ -8,6 +8,11 @@ public class Receipt {
 	public Receipt() {
 	}
 
+	public Receipt(int receiptWarehouseId, String receiptDate) {
+		this.receiptWarehouseId = receiptWarehouseId;
+		this.receiptDate = receiptDate;
+	}
+
 	public Receipt(int receiptId, int receiptWarehouseId, String receiptDate) {
 		this.receiptId = receiptId;
 		this.receiptWarehouseId = receiptWarehouseId;

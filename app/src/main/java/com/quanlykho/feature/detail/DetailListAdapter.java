@@ -54,9 +54,9 @@ public class DetailListAdapter extends BaseAdapter {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = inflater.inflate(layout,null);
 			viewHoder =new ViewHoder();
-			viewHoder.detailName = view.findViewById(R.id.detailNameText);
-			viewHoder.detailAmount = view.findViewById(R.id.detailAmountText);
-			viewHoder.detailUnit = view.findViewById(R.id.detailUnitText);
+			viewHoder.detailName = view.findViewById(R.id.receipt_detail_supplies_name);
+			viewHoder.detailAmount = view.findViewById(R.id.receipt_detail_supplies_amount);
+			viewHoder.detailUnit = view.findViewById(R.id.receipt_detail_supplies_unit);
 			view.setTag(viewHoder);
 		}else{
 			viewHoder= (ViewHoder) view.getTag();

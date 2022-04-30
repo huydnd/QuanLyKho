@@ -6,8 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.quanlykho.database.QueryResponse;
+import com.quanlykho.database.SQLiteDatabaseHelper;
+import com.quanlykho.database.dao.DAO;
+import com.quanlykho.database.dao.WarehouseQuery;
 import com.quanlykho.feature.dashboard.DashboardActivity;
+import com.quanlykho.model.Warehouse;
+import com.quanlykho.util.App;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -25,9 +32,13 @@ public class StartActivity extends AppCompatActivity {
 			// close splash activity
 			finish();
 			// Start main activity
+			setDatabase();
 			startActivity(new Intent(StartActivity.this, DashboardActivity.class));
 
 
 		}
+	}
+	private void setDatabase() {
+		SQLiteDatabaseHelper databaseHelper = SQLiteDatabaseHelper.getInstance();
 	}
 }

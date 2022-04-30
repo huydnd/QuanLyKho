@@ -14,6 +14,11 @@ public class Supplies {
 		this.suppliesUnit = suppliesUnit;
 	}
 
+	public Supplies(String suppliesName, String suppliesUnit) {
+		this.suppliesName = suppliesName;
+		this.suppliesUnit = suppliesUnit;
+	}
+
 	public int getSuppliesId() {
 		return suppliesId;
 	}

@@ -1,48 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/suppliesNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:text="Tên vật tư"
-        android:textSize="25dp">
-    </TextView>
+        android:textSize="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <TextView
         android:id="@+id/suppliesUnitText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/suppliesNameText"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="5dp"
-        android:layout_below="@+id/suppliesNameText"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Đơn vị"
         android:textSize="20dp"
-        android:text="Đơn vị">
-    </TextView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/suppliesNameText"></TextView>
 
     <ImageButton
         android:id="@+id/editSuppliesIconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="20dp"
-        android:layout_toEndOf="@+id/suppliesNameText"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:background="@null"
-        android:src="@drawable/edit_icon_48" />
+        android:src="@drawable/ic_baseline_edit_48"
+        app:layout_constraintEnd_toStartOf="@+id/delSuppliesIconButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/delSuppliesIconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_toEndOf="@+id/editSuppliesIconButton"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:background="@null"
-        android:src="@drawable/del_icon_48" />
-
-
-</RelativeLayout>
+        android:src="@drawable/ic_baseline_delete_48"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

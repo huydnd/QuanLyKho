@@ -4,19 +4,58 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.118" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/background_chosen.xml" value="0.2295" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/border_black.xml" value="0.2295" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/button_selector.xml" value="0.1995" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/button_style.xml" value="0.1995" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/choose_seclector.xml" value="0.1" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/custom_border.xml" value="0.2715" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/custom_rectangle.xml" value="0.2665" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/ic_baseline_access_time_filled_48.xml" value="0.2665" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/ic_baseline_dashboard_24.xml" value="0.3725" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.265" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/ic_baseline_delete_48.xml" value="0.2715" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/ic_baseline_export_48.xml" value="0.2715" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/ic_baseline_history_edu_48.xml" value="0.2715" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/ic_baseline_house_24.xml" value="0.2715" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/ic_baseline_menu_48.xml" value="0.2715" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/ic_baseline_warehouse_48.xml" value="0.2665" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/ic_filter_button.xml" value="0.186" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/ic_filter_button_bg.xml" value="0.186" />
         <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/ic_launcher_background.xml" value="0.118" />
         <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/splash_screen.xml" value="0.118" />
         <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/drawable/splashbackground.xml" value="0.118" />
-        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/activity_dashboard.xml" value="0.33" />
-        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/activity_history_receipt.xml" value="0.3671875" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/activity_dashboard.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/activity_export.xml" value="0.1" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/activity_export_history.xml" value="0.2598958333333333" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/activity_history_receipt.xml" value="0.1" />
         <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/activity_receipt.xml" value="0.371875" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/activity_receipt.xml" value="0.36187845303867405" />
         <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/activity_splash.xml" value="0.1" />
-        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/activity_supplies.xml" value="0.5" />
-        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/activity_warehouse.xml" value="0.371875" />
-        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/item_supplies.xml" value="0.1" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/activity_supplies.xml" value="0.1" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/activity_warehouse.xml" value="0.1" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/app_bar_main.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/dropdown_item.xml" value="0.371875" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/fragment_detail_list.xml" value="1.0" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/fragment_receipt_detail.xml" value="0.1" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/fragment_warehouse_info.xml" value="0.1" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/item_detail.xml" value="0.5" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/item_receipt.xml" value="0.25" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/item_receipt_detail.xml" value="0.25" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/item_supplies.xml" value="0.25" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/item_supplies_detail.xml" value="0.16" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/popup_confirm_del.xml" value="0.371875" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/popup_receipt_detail.xml" value="0.25" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/popup_show_receipt_detail.xml" value="0.371875" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/popup_supplied_edit.xml" value="0.1" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/popup_supplies_add.xml" value="0.25" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/popup_supplies_edit.xml" value="0.1875" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/popup_warehouse_add.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/popup_warehouse_edit.xml" value="0.21100244498777507" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/spinner.xml" value="0.1" />
         <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/layout/warehouse_list_item.xml" value="0.3671875" />
-        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/menu/main_menu.xml" value="0.14" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/menu/main_menu.xml" value="0.33" />
+        <entry key="..\:/Users/huydnd/AndroidStudioProjects/QuanLyKho/app/src/main/res/menu/navigation_menu.xml" value="0.371875" />
       </map>
     </option>
   </component>
