@@ -1,4 +1,4 @@
-package com.quanlykho.feature.exportHistory;
+package com.quanlykho.feature.exporthistory;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,11 +13,8 @@ import com.quanlykho.database.QueryResponse;
 import com.quanlykho.database.dao.DAO;
 import com.quanlykho.database.dao.ExDetailQuery;
 import com.quanlykho.database.dao.WarehouseQuery;
-import com.quanlykho.feature.receipthistory.ReceiptListAdapter;
-import com.quanlykho.model.Detail;
 import com.quanlykho.model.ExDetail;
 import com.quanlykho.model.Export;
-import com.quanlykho.model.Receipt;
 import com.quanlykho.model.Warehouse;
 
 import java.util.ArrayList;

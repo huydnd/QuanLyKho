@@ -1,20 +1,18 @@
 package com.quanlykho.feature.supplies;
 
 import android.content.Context;
-import android.util.Log;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.quanlykho.R;
 import com.quanlykho.model.Supplies;
+
 import java.util.List;
 
 public class SuppliesListAdapter extends BaseAdapter {
@@ -52,6 +50,7 @@ public class SuppliesListAdapter extends BaseAdapter {
 	public static class ViewHolder{
 		public TextView suppliesName;
 		public TextView suppliesUnit;
+		public ImageView suppliesImage;
 		public ImageButton editButton;
 		public ImageButton delButton;
 	}
@@ -69,6 +68,7 @@ public class SuppliesListAdapter extends BaseAdapter {
 			viewHolder =new ViewHolder();
 			viewHolder.suppliesName= view.findViewById(R.id.suppliesNameText);
 			viewHolder.suppliesUnit= view.findViewById(R.id.suppliesUnitText);
+			viewHolder.suppliesImage = view.findViewById(R.id.suppliesImageView);
 			viewHolder.editButton=view.findViewById(R.id.editSuppliesIconButton);
 			viewHolder.delButton=view.findViewById(R.id.delSuppliesIconButton);
 			view.setTag(viewHolder);
@@ -78,6 +78,9 @@ public class SuppliesListAdapter extends BaseAdapter {
 		Supplies supplies = suppliesList.get(i);
 		viewHolder.suppliesName.setText(supplies.getSuppliesName());
 		viewHolder.suppliesUnit.setText(supplies.getSuppliesUnit());
+		byte[] bytesImage = supplies.getSuppliesImage();
+		viewHolder.suppliesImage.setImageBitmap(BitmapFactory.decodeByteArray(bytesImage,0,bytesImage.length));
+
 		viewHolder.editButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

@@ -14,6 +14,7 @@ public class CreateTable {
 					Constants.SUPPLIES_ID+ " INTEGER NOT NULL UNIQUE,"+
 					Constants.SUPPLIES_NAME+ " TEXT NOT NULL,"+
 					Constants.SUPPLIES_UNIT+ " TEXT,"+
+					Constants.SUPPLIES_IMAGE+ " BLOB,"+
 					"PRIMARY KEY("+Constants.SUPPLIES_ID+ " AUTOINCREMENT)"+
 					")";
 

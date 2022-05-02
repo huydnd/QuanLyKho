@@ -7,13 +7,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -22,40 +19,31 @@ import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.quanlykho.R;
 import com.quanlykho.database.QueryResponse;
 import com.quanlykho.database.dao.DAO;
 import com.quanlykho.database.dao.DetailQuery;
 import com.quanlykho.database.dao.ReceiptQuery;
-import com.quanlykho.database.dao.WarehouseQuery;
 import com.quanlykho.feature.dashboard.DashboardActivity;
 import com.quanlykho.feature.export.ExportActivity;
-import com.quanlykho.feature.exportHistory.ExportHistoryActivity;
+import com.quanlykho.feature.exporthistory.ExportHistoryActivity;
 import com.quanlykho.feature.receipt.ReceiptActivity;
 import com.quanlykho.feature.receipt.ReceiptDetailListAdapter;
 import com.quanlykho.feature.supplies.SuppliesActivity;
-import com.quanlykho.feature.supplies.SuppliesListAdapter;
 import com.quanlykho.feature.warehouse.WarehouseActivity;
 import com.quanlykho.model.Detail;
 import com.quanlykho.model.Receipt;
-import com.quanlykho.model.Supplies;
 import com.quanlykho.model.SuppliesDetail;
-import com.quanlykho.model.Warehouse;
-import com.quanlykho.util.Import;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public class ReceiptHistoryActivity extends AppCompatActivity {

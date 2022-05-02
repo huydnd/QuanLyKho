@@ -5,6 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/suppliesImageView"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/suppliesNameText"
         android:layout_width="wrap_content"
@@ -15,7 +22,7 @@
         android:layout_marginTop="10dp"
         android:text="Tên vật tư"
         android:textSize="25dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/suppliesImageView"
         app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <TextView
@@ -29,7 +36,7 @@
         android:layout_marginTop="10dp"
         android:text="Đơn vị"
         android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/suppliesImageView"
         app:layout_constraintTop_toBottomOf="@+id/suppliesNameText"></TextView>
 
     <ImageButton

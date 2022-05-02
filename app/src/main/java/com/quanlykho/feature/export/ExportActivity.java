@@ -1,7 +1,6 @@
 package com.quanlykho.feature.export;
 
 import static com.quanlykho.util.Import.mergeDetail;
-import static com.quanlykho.util.Import.suppliesDetailListToDetailList;
 import static com.quanlykho.util.Import.suppliesDetailListToExDetailList;
 
 import androidx.annotation.NonNull;
@@ -33,16 +32,13 @@ import com.quanlykho.database.dao.ExportQuery;
 import com.quanlykho.database.dao.ReceiptQuery;
 import com.quanlykho.database.dao.WarehouseQuery;
 import com.quanlykho.feature.dashboard.DashboardActivity;
-import com.quanlykho.feature.exportHistory.ExportHistoryActivity;
+import com.quanlykho.feature.exporthistory.ExportHistoryActivity;
 import com.quanlykho.feature.receipt.ReceiptActivity;
-import com.quanlykho.feature.receipt.ReceiptViewModel;
 import com.quanlykho.feature.receipthistory.ReceiptHistoryActivity;
 import com.quanlykho.feature.supplies.SuppliesActivity;
 import com.quanlykho.feature.warehouse.WarehouseActivity;
-import com.quanlykho.model.Detail;
 import com.quanlykho.model.ExDetail;
 import com.quanlykho.model.Export;
-import com.quanlykho.model.Receipt;
 import com.quanlykho.model.SuppliesDetail;
 import com.quanlykho.model.Warehouse;
 

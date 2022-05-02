@@ -24,6 +24,7 @@ public class SuppliesQuery implements DAO.SuppliesQuery{
 
 		contentValues.put(Constants.SUPPLIES_NAME, supplies.getSuppliesName());
 		contentValues.put(Constants.SUPPLIES_UNIT, supplies.getSuppliesUnit());
+		contentValues.put(Constants.SUPPLIES_IMAGE, supplies.getSuppliesImage());
 
 		return contentValues;
 	}
@@ -146,7 +147,7 @@ public class SuppliesQuery implements DAO.SuppliesQuery{
 		int id = cursor.getInt(cursor.getColumnIndexOrThrow(Constants.SUPPLIES_ID));
 		String name = cursor.getString(cursor.getColumnIndexOrThrow(Constants.SUPPLIES_NAME));
 		String unit = cursor.getString(cursor.getColumnIndexOrThrow(Constants.SUPPLIES_UNIT));
-
-		return new Supplies(id, name, unit);
+		byte[] image = cursor.getBlob(cursor.getColumnIndexOrThrow(Constants.SUPPLIES_IMAGE));
+		return new Supplies(id, name, unit, image);
 	}
 }

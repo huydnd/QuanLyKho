@@ -1,23 +1,17 @@
 package com.quanlykho.feature.dashboard;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
 import com.quanlykho.R;
 import com.quanlykho.feature.export.ExportActivity;
-import com.quanlykho.feature.exportHistory.ExportHistoryActivity;
+import com.quanlykho.feature.exporthistory.ExportHistoryActivity;
 import com.quanlykho.feature.receipt.ReceiptActivity;
 import com.quanlykho.feature.receipthistory.ReceiptHistoryActivity;
 import com.quanlykho.feature.supplies.SuppliesActivity;
@@ -74,12 +68,14 @@ public class DashboardActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				startActivity(new Intent(DashboardActivity.this,ReceiptActivity.class));
+				overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
 			}
 		});
 		exportButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				startActivity(new Intent(DashboardActivity.this, ExportActivity.class));
+				overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
 			}
 		});
 		warehouseButton.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +83,7 @@ public class DashboardActivity extends AppCompatActivity {
 			public void onClick(View view) {
 				Intent intent=new Intent(DashboardActivity.this,WarehouseActivity.class);
 				startActivity(intent);
+				overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
 			}
 		});
 		suppliesButton.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +91,7 @@ public class DashboardActivity extends AppCompatActivity {
 			public void onClick(View view) {
 				Intent intent=new Intent(DashboardActivity.this, SuppliesActivity.class);
 				startActivity(intent);
+				overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
 			}
 		});
 		receiptHistoryButton.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +99,7 @@ public class DashboardActivity extends AppCompatActivity {
 			public void onClick(View view) {
 				Intent intent=new Intent(DashboardActivity.this, ReceiptHistoryActivity.class);
 				startActivity(intent);
+				overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
 			}
 		});
 		exportHistoryButton.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +107,7 @@ public class DashboardActivity extends AppCompatActivity {
 			public void onClick(View view) {
 				Intent intent=new Intent(DashboardActivity.this, ExportHistoryActivity.class);
 				startActivity(intent);
+				overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
 			}
 		});
 		quitButton.setOnClickListener(new View.OnClickListener() {

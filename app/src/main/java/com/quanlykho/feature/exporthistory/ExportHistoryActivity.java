@@ -1,4 +1,4 @@
-package com.quanlykho.feature.exportHistory;
+package com.quanlykho.feature.exporthistory;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -26,22 +26,17 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.quanlykho.R;
 import com.quanlykho.database.QueryResponse;
 import com.quanlykho.database.dao.DAO;
-import com.quanlykho.database.dao.DetailQuery;
 import com.quanlykho.database.dao.ExDetailQuery;
 import com.quanlykho.database.dao.ExportQuery;
-import com.quanlykho.database.dao.ReceiptQuery;
 import com.quanlykho.feature.dashboard.DashboardActivity;
 import com.quanlykho.feature.export.ExportActivity;
 import com.quanlykho.feature.receipt.ReceiptActivity;
 import com.quanlykho.feature.receipt.ReceiptDetailListAdapter;
 import com.quanlykho.feature.receipthistory.ReceiptHistoryActivity;
-import com.quanlykho.feature.receipthistory.ReceiptListAdapter;
 import com.quanlykho.feature.supplies.SuppliesActivity;
 import com.quanlykho.feature.warehouse.WarehouseActivity;
-import com.quanlykho.model.Detail;
 import com.quanlykho.model.ExDetail;
 import com.quanlykho.model.Export;
-import com.quanlykho.model.Receipt;
 import com.quanlykho.model.SuppliesDetail;
 import com.quanlykho.util.Import;
 

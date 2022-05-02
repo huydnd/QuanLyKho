@@ -4,14 +4,10 @@ import static com.quanlykho.util.Import.mergeDetail;
 import static com.quanlykho.util.Import.suppliesDetailListToDetailList;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +31,7 @@ import com.quanlykho.database.dao.ReceiptQuery;
 import com.quanlykho.database.dao.WarehouseQuery;
 import com.quanlykho.feature.dashboard.DashboardActivity;
 import com.quanlykho.feature.export.ExportActivity;
-import com.quanlykho.feature.exportHistory.ExportHistoryActivity;
+import com.quanlykho.feature.exporthistory.ExportHistoryActivity;
 import com.quanlykho.feature.receipthistory.ReceiptHistoryActivity;
 import com.quanlykho.feature.supplies.SuppliesActivity;
 import com.quanlykho.feature.warehouse.WarehouseActivity;
@@ -44,7 +39,6 @@ import com.quanlykho.model.Detail;
 import com.quanlykho.model.Receipt;
 import com.quanlykho.model.SuppliesDetail;
 import com.quanlykho.model.Warehouse;
-import com.quanlykho.util.Import;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

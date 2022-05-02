@@ -1,7 +1,6 @@
 package com.quanlykho.feature.warehouse;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -33,7 +32,7 @@ import com.quanlykho.database.dao.DAO;
 import com.quanlykho.database.dao.WarehouseQuery;
 import com.quanlykho.feature.dashboard.DashboardActivity;
 import com.quanlykho.feature.export.ExportActivity;
-import com.quanlykho.feature.exportHistory.ExportHistoryActivity;
+import com.quanlykho.feature.exporthistory.ExportHistoryActivity;
 import com.quanlykho.feature.receipt.ReceiptActivity;
 import com.quanlykho.feature.receipthistory.ReceiptHistoryActivity;
 import com.quanlykho.feature.supplies.SuppliesActivity;

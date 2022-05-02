@@ -12,6 +12,7 @@ public class Constants {
 	public static final String SUPPLIES_ID="SuppliesId";
 	public static final String SUPPLIES_NAME="SuppliesName";
 	public static final String SUPPLIES_UNIT="SuppliesUnit";
+	public static final String SUPPLIES_IMAGE="SuppliesImage";
 
 	//import receipt table
 	public static final String RECEIPT_TABLE="Receipt";
