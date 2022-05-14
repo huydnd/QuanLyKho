@@ -25,6 +25,7 @@ public class Constants {
 	public static final String EXPORT_ID="ExportId";
 	public static final String EXPORT_WAREHOUSE_ID="Export_WarehouseId";
 	public static final String EXPORT_DATE="ExportDate";
+	public static final String EXPORT_ADDRESS="ExportAddress";
 
 	//import detail table
 	public static final String DETAIL_TABLE="Detail";

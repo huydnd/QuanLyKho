@@ -4,19 +4,31 @@ public class Export {
 	private int exportId;
 	private int exportWarehouseId;
 	private String exportDate;
+	private String exportAddress;
 
 	public Export() {
 	}
 
-	public Export(int exportId, int exportWarehouseId, String exportDate) {
+	public Export(int exportId, int exportWarehouseId, String exportDate, String exportAddress) {
 		this.exportId = exportId;
 		this.exportWarehouseId = exportWarehouseId;
 		this.exportDate = exportDate;
+		this.exportAddress = exportAddress;
 	}
 
-	public Export(int exportWarehouseId, String exportDate) {
+
+	public Export(int exportWarehouseId, String exportDate,String exportAddress) {
 		this.exportWarehouseId = exportWarehouseId;
 		this.exportDate = exportDate;
+		this.exportAddress = exportAddress;
+	}
+
+	public String getExportAddress() {
+		return exportAddress;
+	}
+
+	public void setExportAddress(String exportAddress) {
+		this.exportAddress = exportAddress;
 	}
 
 	public int getExportId() {

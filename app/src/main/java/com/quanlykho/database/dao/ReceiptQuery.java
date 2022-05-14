@@ -24,7 +24,7 @@ public class ReceiptQuery implements DAO.ReceiptQuery{
 
 	private final SQLiteDatabaseHelper databaseHelper = SQLiteDatabaseHelper.getInstance();
 
-	private DatabaseReference mDatabase= FirebaseDatabase.getInstance("https://warehouse-management-pro-c5dd5-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
+//	private DatabaseReference mDatabase= FirebaseDatabase.getInstance("https://warehouse-management-pro-c5dd5-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
 
 	public void createReceipt(Receipt receipt, QueryResponse<Receipt> response){
 		android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
@@ -41,12 +41,12 @@ public class ReceiptQuery implements DAO.ReceiptQuery{
 				response.onSuccess(receipt);
 				String info =  "Xác nhận phiếu nhập kho lúc: " + receipt.getReceiptDate();
 				Toast.makeText(App.context, info, Toast.LENGTH_LONG).show();
-
-				DatabaseReference rcRef= mDatabase.child(User.getUId()+"/Receipt/"+String.valueOf(receipt.getReceiptId()));
-				Map<String,String> rcData= new HashMap<String,String>();
-				rcData.put("Receipt_WarehouseId",String.valueOf(receipt.getReceiptWarehouseId()));
-				rcData.put("ReceiptDate",receipt.getReceiptDate());
-				rcRef.setValue(rcData);
+//
+//				DatabaseReference rcRef= mDatabase.child(User.getUId()+"/Receipt/"+String.valueOf(receipt.getReceiptId()));
+//				Map<String,String> rcData= new HashMap<String,String>();
+//				rcData.put("Receipt_WarehouseId",String.valueOf(receipt.getReceiptWarehouseId()));
+//				rcData.put("ReceiptDate",receipt.getReceiptDate());
+//				rcRef.setValue(rcData);
 			}
 			else
 				response.onFailure("Không tạo được phiếu xuất kho!");
@@ -144,9 +144,9 @@ public class ReceiptQuery implements DAO.ReceiptQuery{
 			String query = "DELETE FROM Receipt WHERE Receipt.Receipt_WarehouseId=" + warehouseID + ";";
 			sqLiteDatabase.execSQL(query);
 			response.onSuccess(true);
-			for(Receipt receipt : datax){
-				mDatabase.child(User.getUId()+"/Receipt/"+String.valueOf(receipt.getReceiptId())).removeValue();
-			}
+//			for(Receipt receipt : datax){
+//				mDatabase.child(User.getUId()+"/Receipt/"+String.valueOf(receipt.getReceiptId())).removeValue();
+//			}
 		}catch (SQLiteException e){
 			response.onFailure("Không thể xóa");
 		}

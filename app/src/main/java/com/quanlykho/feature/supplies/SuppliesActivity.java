@@ -61,8 +61,6 @@ public class SuppliesActivity extends AppCompatActivity implements SuppliesListA
 	private DrawerLayout drawerLayout;
 	private NavigationView navigationView;
 
-
-
 	ListView suppliesListView;
 	ArrayList<Supplies> suppliesArrayList= new ArrayList<Supplies>();
 	SuppliesListAdapter suppliesListAdapter;
@@ -99,7 +97,7 @@ public class SuppliesActivity extends AppCompatActivity implements SuppliesListA
 		setContentView(R.layout.activity_supplies);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeAsUpIndicator(getDrawable(R.drawable.ic_baseline_menu_48));
-		getSupportActionBar().setTitle("DANH SÁCH VẬT TƯ");
+		getSupportActionBar().setTitle(R.string.Danh_Sach_Vạt_Tu);
 		setControl();
 		setEvent();
 
@@ -107,7 +105,7 @@ public class SuppliesActivity extends AppCompatActivity implements SuppliesListA
 			@Override
 			public void onSuccess(List<Supplies> data) {
 				suppliesArrayList.addAll(data);
-				Toast.makeText(SuppliesActivity.this,"So luong vat tu = "+suppliesArrayList.size(),Toast.LENGTH_SHORT).show();
+				Toast.makeText(SuppliesActivity.this,getString(R.string.So_luong_vat_tu)+suppliesArrayList.size(),Toast.LENGTH_SHORT).show();
 
 			}
 			@Override
@@ -261,11 +259,11 @@ public class SuppliesActivity extends AppCompatActivity implements SuppliesListA
 
 	void createSupplies(Context context,String name, String unit,byte[] image){
 		if(name.length()==0){
-			Toast.makeText(context, "Tên vật tư không được trống", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, R.string.ten_vat_tu_khong_dươc_de_trong, Toast.LENGTH_SHORT).show();
 			return;
 		}
 		if(unit.length()==0){
-			Toast.makeText(context, "Đơn vị không được trống", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, R.string.Don_vi_khong_duoc_trong, Toast.LENGTH_SHORT).show();
 			return;
 		}
 
@@ -282,7 +280,7 @@ public class SuppliesActivity extends AppCompatActivity implements SuppliesListA
 		});
 		for(Supplies w : e) {
 			if (w.getSuppliesName().equals(name)) {
-				Toast.makeText(context, "Thông tin vật tư đã tồn tại", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, R.string.Thong_tin_vat_tu_da_ton_tai, Toast.LENGTH_SHORT).show();
 				return;
 			}
 		}
@@ -314,18 +312,18 @@ public class SuppliesActivity extends AppCompatActivity implements SuppliesListA
 
 	//image Handler
 	private void startImageUploadOptions() {
-		final CharSequence[] options = {"Chụp từ Camera", "Chọn từ thư viện", "Hủy"};
+		final CharSequence[] options = {getString(R.string.Chup_tu_camera), getString(R.string.Chon_tu_thu_vien), getString(R.string.Huy)};
 		android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(SuppliesActivity.this);
-		builder.setTitle("Chọn ảnh cho sản phẩm mới");
+		builder.setTitle(R.string.Chon_anh_cho_san_pham_moi);
 		builder.setIcon(R.drawable.ic_baseline_camera_alt_48);
 		builder.setItems(options, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int item) {
-				if (options[item].equals("Chụp từ Camera")) {
+				if (options[item].equals(getString(R.string.Chup_tu_Camera))) {
 					launchCamera(SuppliesActivity.this);
-				} else if (options[item].equals("Chọn từ thư viện")) {
+				} else if (options[item].equals(getString(R.string.Chon_Tu_thu_vien))) {
 					launchGalleryImagePicker();
-				} else if (options[item].equals("Hủy")) {
+				} else if (options[item].equals(getString(R.string.huy))) {
 					dialog.dismiss();
 				}
 			}
@@ -431,7 +429,7 @@ public class SuppliesActivity extends AppCompatActivity implements SuppliesListA
 	boolean checkImageSizeLimit(String path){
 		File file = new File(path);
 		int file_size = Integer.parseInt(String.valueOf(file.length()/1024));
-		if(file_size < 1000)// smaller than 1mb, 24kb is saved for better future :D
+		if(file_size < 5000)// smaller than 1mb, 24kb is saved for better future :D
 			return true;
 		else
 			return false;
@@ -489,11 +487,11 @@ public class SuppliesActivity extends AppCompatActivity implements SuppliesListA
 				bitmap.compress(Bitmap.CompressFormat.PNG, 0, baos);
 				byte[] imageInByte = baos.toByteArray();
 				if(name.length()==0){
-					Toast.makeText(context, "Tên vật tư không được trống", Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, R.string.ten_vat_tu_khong_duoc_trong, Toast.LENGTH_SHORT).show();
 					return;
 				}
 				if(unit.length()==0){
-					Toast.makeText(context, "Đơn vị không được trống", Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, R.string.don_vi_khong_duoc_trong, Toast.LENGTH_SHORT).show();
 					return;
 				}
 				supplies.setSuppliesName(name);
@@ -527,7 +525,7 @@ public class SuppliesActivity extends AppCompatActivity implements SuppliesListA
 		});
 		for(Supplies w : e) {
 			if ((w.getSuppliesId()!=supplies.getSuppliesId())&&(w.getSuppliesName().equals(supplies.getSuppliesName()))) {
-				Toast.makeText(context, "Thông tin vật tư đã tồn tại", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, R.string.thong_tin_vat_tu_da_ton_tai, Toast.LENGTH_SHORT).show();
 				return;
 			}
 		}

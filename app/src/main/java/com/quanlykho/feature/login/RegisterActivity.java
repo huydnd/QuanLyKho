@@ -3,6 +3,8 @@ package com.quanlykho.feature.login;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,17 +18,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.quanlykho.R;
 import com.quanlykho.feature.dashboard.DashboardActivity;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
 
@@ -38,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
+    private FirebaseFirestore mStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         changeStatusBarColor();
         mAuth = FirebaseAuth.getInstance();
+        mStore =FirebaseFirestore.getInstance();
         firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -60,7 +70,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         mRegister = (CircularProgressButton) findViewById(R.id.cirRegisterButton);
-
         mEmail = (EditText) findViewById(R.id.editTextEmail);
         mPassword = (EditText) findViewById(R.id.editTextPassword);
         mName = (EditText) findViewById(R.id.editTextName);
@@ -75,19 +84,87 @@ public class RegisterActivity extends AppCompatActivity {
                 final String password = mPassword.getText().toString();
                 final String name = mName.getText().toString();
                 final String phone = mPhone.getText().toString();
+                if(TextUtils.isEmpty(email)){
+                    mEmail.setError("Email is required");
+                    mRegister.revertAnimation();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(password)){
+                    mPassword.setError("Password is required");
+                    mRegister.revertAnimation();
+                    return;
+                }
+
+                if(password.length() < 6){
+                    mPassword.setError("Password must be >= 6 characters");
+                    mRegister.revertAnimation();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(name)){
+                    mName.setError("Name is required");
+                    mRegister.revertAnimation();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(phone)){
+                    mPhone.setError("Phone is required");
+                    mRegister.revertAnimation();
+                    return;
+                }
+
+                if(phone.length()<9){
+                    mPhone.setError("Phone must be >= 9 number");
+                    mRegister.revertAnimation();
+                    return;
+                }
+
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(!task.isSuccessful()){
-                            Toast.makeText(RegisterActivity.this, "sign up error", Toast.LENGTH_SHORT).show();
+                            mRegister.revertAnimation();
+                            Toast.makeText(RegisterActivity.this, "Sign up error!\n"+ Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                         }else{
+                            mRegister.revertAnimation();
+                            FirebaseUser fuser = mAuth.getCurrentUser();
+                            fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(RegisterActivity.this, "Verification email has been sent.", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d("Verify", "onFailure: Email not sent " + e.getMessage());
+                                }
+                            });
+                            Toast.makeText(RegisterActivity.this, "User created.", Toast.LENGTH_SHORT).show();
+
                             String userId = mAuth.getCurrentUser().getUid();
-                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-                            Map userInfo = new HashMap<>();
-                            userInfo.put("name", name);
-                            userInfo.put("phone", phone);
-                            userInfo.put("profileImageUrl", "default");
-                            currentUserDb.updateChildren(userInfo);
+
+                            DocumentReference documentReference = mStore.collection("users").document(userId);
+//                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+                            Map<String,Object> user = new HashMap<>();
+                            user.put("name", name);
+                            user.put("email",email);
+                            user.put("phone", phone);
+                            user.put("profileImageUrl", "default");
+//                            currentUserDb.updateChildren(user);
+                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("Verify", "onSuccess: user Profile is created for "+ userId);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d("Verify", "onFailure: " + e.toString());
+                                }
+                            });
+                            startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
+
                         }
                     }
                 });

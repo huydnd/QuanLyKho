@@ -9,17 +9,29 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.quanlykho.R;
 import com.quanlykho.feature.export.ExportActivity;
 import com.quanlykho.feature.exporthistory.ExportHistoryActivity;
@@ -30,7 +42,9 @@ import com.quanlykho.feature.receipt.ReceiptActivity;
 import com.quanlykho.feature.receipthistory.ReceiptHistoryActivity;
 import com.quanlykho.feature.statistic.SuppliesChartActivity;
 import com.quanlykho.feature.supplies.SuppliesActivity;
+import com.quanlykho.feature.userinfo.UserInfoActivity;
 import com.quanlykho.feature.warehouse.WarehouseActivity;
+import com.squareup.picasso.Picasso;
 import com.zeugmasolutions.localehelper.LocaleHelper;
 import com.zeugmasolutions.localehelper.LocaleHelperActivityDelegate;
 import com.zeugmasolutions.localehelper.LocaleHelperActivityDelegateImpl;
@@ -38,16 +52,23 @@ import com.zeugmasolutions.localehelper.Locales;
 
 import java.util.Locale;
 
+import javax.annotation.Nullable;
+
 
 public class DashboardActivity extends AppCompatActivity  {
 	private DrawerLayout drawerLayout;
 	private NavigationView navigationView;
 	private View header;
+	private ImageView profileImage;
+	private TextView profileName;
 	CardView receiptButton,exportButton, warehouseButton,suppliesButton, receiptHistoryButton,exportHistoryButton,chartButton,pdfButton;
 	ImageButton menuButton,quitButton;
 	MenuItem menuItem1;
 	ToggleButton toggleButton;
 
+	FirebaseAuth fAuth;
+	FirebaseFirestore fStore;
+	StorageReference storageReference;
 	LocaleHelperActivityDelegate localeHelperActivityDelegate= new LocaleHelperActivityDelegateImpl();
 
 	@NonNull
@@ -93,9 +114,30 @@ public class DashboardActivity extends AppCompatActivity  {
 		super.onCreate(savedInstanceState);
 		localeHelperActivityDelegate.onCreate(this);
 		setContentView(R.layout.activity_dashboard);
-
 		setControl();
+
 		setEvent();
+
+		StorageReference profileRef = storageReference.child("users/"+fAuth.getCurrentUser().getUid()+"/avatar.png");
+		profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+			@Override
+			public void onSuccess(Uri uri) {
+				Picasso.get().load(uri).into(profileImage);
+			}
+		});
+		String userId = fAuth.getCurrentUser().getUid();
+		DocumentReference documentReference = fStore.collection("users").document(userId);
+		documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+			@Override
+			public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+				if(documentSnapshot.exists()){
+					profileName.setText(documentSnapshot.getString("name"));
+				}else {
+					Log.d("tag", "onEvent: Document do not exists");
+				}
+			}
+		});
+
 	}
 
 
@@ -116,6 +158,13 @@ public class DashboardActivity extends AppCompatActivity  {
 		header=navigationView.getHeaderView(0);
 		menuItem1 = navigationView.getMenu().findItem(R.id.nav_language);
 		toggleButton = (ToggleButton) menuItem1.getActionView().findViewById(R.id.lgToggleButton);
+		View header=navigationView.getHeaderView(0);
+		profileImage = header.findViewById(R.id.imgProfile);
+		profileName = header.findViewById(R.id.textView);
+
+		fAuth = FirebaseAuth.getInstance();
+		fStore = FirebaseFirestore.getInstance();
+		storageReference = FirebaseStorage.getInstance().getReference();
 	}
 
 	private void setEvent(){
@@ -126,7 +175,7 @@ public class DashboardActivity extends AppCompatActivity  {
 
 				switch (id) {
 					case R.id.nav_user_info:
-						startActivity( new Intent(DashboardActivity.this, DashboardActivity.class));
+						startActivity( new Intent(DashboardActivity.this, UserInfoActivity.class));
 						break;
 					case R.id.nav_map:
 						startActivity( new Intent(DashboardActivity.this, MapActivity.class));

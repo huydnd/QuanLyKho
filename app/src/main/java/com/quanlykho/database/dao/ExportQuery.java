@@ -24,7 +24,6 @@ public class ExportQuery implements DAO.ExportQuery{
 
 	private final SQLiteDatabaseHelper databaseHelper = SQLiteDatabaseHelper.getInstance();
 
-	private DatabaseReference mDatabase= FirebaseDatabase.getInstance("https://warehouse-management-pro-c5dd5-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
 
 	public void createExport(Export export, QueryResponse<Export> response){
 		android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
@@ -32,7 +31,7 @@ public class ExportQuery implements DAO.ExportQuery{
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(Constants.EXPORT_WAREHOUSE_ID, export.getExportWarehouseId());
 		contentValues.put(Constants.EXPORT_DATE, export.getExportDate());
-
+		contentValues.put(Constants.EXPORT_ADDRESS, export.getExportAddress());
 		try{
 			int rowCount = (int) sqLiteDatabase.insertOrThrow(Constants.EXPORT_TABLE, null,contentValues);
 
@@ -42,11 +41,11 @@ public class ExportQuery implements DAO.ExportQuery{
 				String info =  "Xác nhận phiếu nhập kho lúc: " + export.getExportDate();
 				Toast.makeText(App.context, info, Toast.LENGTH_LONG).show();
 
-				DatabaseReference exRef= mDatabase.child(User.getUId()+"/Export/"+String.valueOf(export.getExportId()));
-				Map<String,String> exData= new HashMap<String,String>();
-				exData.put("Export_WarehouseId",String.valueOf(export.getExportWarehouseId()));
-				exData.put("ExportDate",export.getExportDate());
-				exRef.setValue(exData);
+//				DatabaseReference exRef= mDatabase.child(User.getUId()+"/Export/"+String.valueOf(export.getExportId()));
+//				Map<String,String> exData= new HashMap<String,String>();
+//				exData.put("Export_WarehouseId",String.valueOf(export.getExportWarehouseId()));
+//				exData.put("ExportDate",export.getExportDate());
+//				exRef.setValue(exData);
 			}
 			else
 				response.onFailure("Không tạo được phiếu xuất kho!");
@@ -80,7 +79,7 @@ public class ExportQuery implements DAO.ExportQuery{
 					export.setExportId(cursor.getInt(cursor.getColumnIndexOrThrow(Constants.EXPORT_ID)));;
 					export.setExportWarehouseId(cursor.getInt(cursor.getColumnIndexOrThrow(Constants.EXPORT_WAREHOUSE_ID)));
 					export.setExportDate(cursor.getString(cursor.getColumnIndexOrThrow(Constants.EXPORT_DATE)));
-
+					export.setExportAddress(cursor.getString(cursor.getColumnIndexOrThrow(Constants.EXPORT_ADDRESS)));
 					exports.add(export);
 				} while (cursor.moveToNext());
 
@@ -115,7 +114,7 @@ public class ExportQuery implements DAO.ExportQuery{
 					export.setExportId(cursor.getInt(cursor.getColumnIndexOrThrow(Constants.EXPORT_ID)));;
 					export.setExportWarehouseId(cursor.getInt(cursor.getColumnIndexOrThrow(Constants.EXPORT_WAREHOUSE_ID)));
 					export.setExportDate(cursor.getString(cursor.getColumnIndexOrThrow(Constants.EXPORT_DATE)));
-
+					export.setExportAddress(cursor.getString(cursor.getColumnIndexOrThrow(Constants.EXPORT_ADDRESS)));
 					exports.add(export);
 				} while (cursor.moveToNext());
 
@@ -145,9 +144,9 @@ public class ExportQuery implements DAO.ExportQuery{
 			String query = "DELETE FROM Export WHERE Export.Export_WarehouseId=" + warehouseID + ";";
 			sqLiteDatabase.execSQL(query);
 			response.onSuccess(true);
-			for(Export export : datax){
-				mDatabase.child(User.getUId()+"/Export/"+String.valueOf(export.getExportId())).removeValue();
-			}
+//			for(Export export : datax){
+//				mDatabase.child(User.getUId()+"/Export/"+String.valueOf(export.getExportId())).removeValue();
+//			}
 		}catch (SQLiteException e){
 			response.onFailure("Không thể xóa");
 		}
@@ -164,6 +163,4 @@ public class ExportQuery implements DAO.ExportQuery{
 		else
 			response.onFailure("rowcount = -1");
 	}
-
-
 }

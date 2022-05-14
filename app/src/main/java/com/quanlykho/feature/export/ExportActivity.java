@@ -36,6 +36,7 @@ import com.quanlykho.database.dao.ReceiptQuery;
 import com.quanlykho.database.dao.WarehouseQuery;
 import com.quanlykho.feature.dashboard.DashboardActivity;
 import com.quanlykho.feature.exporthistory.ExportHistoryActivity;
+import com.quanlykho.feature.mapservice.SelectAddressActivity;
 import com.quanlykho.feature.pdfexport.CreatePdfActivity;
 import com.quanlykho.feature.receipt.ReceiptActivity;
 import com.quanlykho.feature.receipthistory.ReceiptHistoryActivity;
@@ -100,7 +101,7 @@ public class ExportActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_export);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeAsUpIndicator(getDrawable(R.drawable.ic_baseline_menu_48));
-		getSupportActionBar().setTitle("XUẤT KHO");
+		getSupportActionBar().setTitle(R.string.Xuat_kho);
 		setControl();
 		setEvent();
 		warehouseQuery.readAllWarehouse(new QueryResponse<List<Warehouse>>() {
@@ -149,6 +150,7 @@ public class ExportActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				suppliesDetailArrayList=viewModel.getData().getValue();
+
 				if(warehouseIndex==-1){
 					//Tao popup chua chon kho vs chi tiet
 					Toast.makeText(ExportActivity.this,"Vui lòng chọn kho để nhập!",Toast.LENGTH_SHORT).show();
@@ -157,35 +159,12 @@ public class ExportActivity extends AppCompatActivity {
 					Toast.makeText(ExportActivity.this,"Danh sách chi tiết vật tư trống!",Toast.LENGTH_SHORT).show();
 					return;
 				}
-
-				Export export = new Export(warehouseArrayList.get(warehouseIndex).getWarehouseId(),String.valueOf(LocalDateTime.now().toLocalDate()));
-				exportQuery.createExport(export, new QueryResponse<Export>() {
-					@Override
-					public void onSuccess(Export data) {
-						ArrayList<SuppliesDetail>suppliesDetails=mergeDetail(suppliesDetailArrayList);
-						ArrayList<ExDetail> exDetails = suppliesDetailListToExDetailList(suppliesDetails,data.getExportId());
-						for (ExDetail e: exDetails){
-							exDetailQuery.createExDetail(e, new QueryResponse<Boolean>() {
-								@Override
-								public void onSuccess(Boolean data) {
-									Log.d("TESTDETAIL","4: "+e.getExDetailAmount());
-								}
-								@Override
-								public void onFailure(String message) {
-									Log.d("TESTDETAL","INSERT: FAIL CMNR "+e);
-								}
-							});
-						}
-						Intent intent = getIntent();
-						finish();
-						startActivity(intent);
-					}
-					@Override
-					public void onFailure(String message) {
-					}
-				});
-
-
+				Bundle bundle = new Bundle();
+				bundle.putInt("warehouseId",warehouseArrayList.get(warehouseIndex).getWarehouseId());
+				bundle.putParcelableArrayList("list",suppliesDetailArrayList);
+				Intent intent = new Intent(ExportActivity.this, SelectAddressActivity.class);
+				intent.putExtras(bundle);
+				startActivity(intent);
 			}
 		});
 		navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

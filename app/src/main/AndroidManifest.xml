@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.quanlykho" >
+    package="com.quanlykho">
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <application
         android:name=".util.App"
@@ -19,7 +20,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.QuanLyKho" >
+        android:theme="@style/Theme.QuanLyKho">
+        <activity
+            android:name=".feature.userinfo.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.login.ForgetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.export.SaveExportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.mapservice.SelectAddressActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -33,9 +46,13 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".feature.userinfo.UserInfoActivity"
+            android:exported="false" />
         <activity
             android:name=".feature.pdfexport.CreatePdfActivity"
             android:exported="false" />
@@ -47,7 +64,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.quanlykho"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
@@ -56,7 +73,7 @@
         <activity
             android:name=".StartActivity"
             android:exported="true"
-            android:theme="@style/Theme.QuanLyKho.SplashScreen" >
+            android:theme="@style/Theme.QuanLyKho.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -89,8 +106,7 @@
         <activity android:name=".feature.warehouse.WarehouseActivity" />
         <activity
             android:name=".feature.receipt.ReceiptActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

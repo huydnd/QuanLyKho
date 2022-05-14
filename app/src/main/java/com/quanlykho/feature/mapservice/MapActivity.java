@@ -3,6 +3,8 @@ package com.quanlykho.feature.mapservice;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -17,7 +19,7 @@ import com.quanlykho.R;
 
 public class MapActivity extends AppCompatActivity {
 
-	private Button btn_get;
+//	private Button btn_get;
 	private FrameLayout frameLayout;
 	private boolean flag = false;
 	private String[] permission = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -25,20 +27,32 @@ public class MapActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.activity_map);
 
-		btn_get = findViewById(R.id.btn_get);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeAsUpIndicator(getDrawable(R.drawable.ic_baseline_arrow_back_24));
+		getSupportActionBar().setTitle("GOOGLE MAP");
 		frameLayout = findViewById(R.id.frameLayout);
-
-
 		Initial();
-		btn_get.setOnClickListener(PERMISSION);
 
 		if (flag) {
 			//Used to Loading the MapFragment
 			MapFragment mapFragment = new MapFragment();
 			getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, mapFragment).commit();
 		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId())
+		{
+			case android.R.id.home:
+				onBackPressed();
+				break;
+			default:break;
+		}
+		return false;
 	}
 
 	private void Initial() {

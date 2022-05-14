@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.common.api.Status;
@@ -28,6 +29,7 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.quanlykho.R;
 
 import java.io.IOException;
@@ -47,11 +49,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_map, container, false);
+        return view;
+    }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.fragment_map);
         supportMapFragment.getMapAsync(this);
-
-        //Initial the Place API
         if (!Places.isInitialized()) {
             Places.initialize(getActivity(), "AIzaSyC30522yFCSX2hRN8GZfOtxM0t_2mpOcvI");
         }
@@ -86,10 +91,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 Toast.makeText(getActivity(), "Try to Fetch the Original Place, but occures error.", Toast.LENGTH_SHORT).show();
             }
         });
-
-        return view;
     }
-
 
     @SuppressLint("MissingPermission")
     @Override

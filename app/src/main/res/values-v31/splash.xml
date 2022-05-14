@@ -2,7 +2,7 @@
 <resources>
     <style name="Theme.QuanLyKho.SplashScreen" parent="Theme.SplashScreen">
         <item name="android:windowSplashScreenBackground">@color/white</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/wmglogo200</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/warehouse_logo_x</item>
         <item name="windowSplashScreenAnimationDuration">1000</item>
         <item name="postSplashScreenTheme">@style/Theme.QuanLyKho</item>
     </style>

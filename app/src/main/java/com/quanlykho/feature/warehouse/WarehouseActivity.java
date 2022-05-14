@@ -1,6 +1,7 @@
 package com.quanlykho.feature.warehouse;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -26,8 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.quanlykho.R;
 import com.quanlykho.database.QueryResponse;
 import com.quanlykho.database.dao.DAO;
@@ -48,8 +47,6 @@ import com.quanlykho.model.Export;
 import com.quanlykho.model.Receipt;
 import com.quanlykho.model.SuppliesDetail;
 import com.quanlykho.model.Warehouse;
-import com.quanlykho.util.User;
-import com.skydoves.transformationlayout.TransformationAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +68,7 @@ public class WarehouseActivity extends AppCompatActivity {
 	private FragmentManager fragmentManager;
 	private FragmentTransaction fragmentTransaction;
 	//For Popup Add
-	private Button addButton_addWarehousePopup, cancelButton_addWarehousePopup;
+	private Button addButton_addWarehousePopup, cancelButton_addWarehousePopup, mapButton_addWarehousePopup;
 	private EditText nameWarehouseEditText_addWarehousePopup, addressWarehouseEditText_addWarehousePopup;
 	private AlertDialog.Builder dialogBuilder;
 	private AlertDialog dialog;
@@ -86,7 +83,8 @@ public class WarehouseActivity extends AppCompatActivity {
 	private DAO.ReceiptQuery receiptQuery = new ReceiptQuery();
 	private DAO.ExportQuery exportQuery =new ExportQuery();
 	private int warehouseIndex=-1;
-
+	private static final int PERMISSION_ADD_POPUP=1;
+	private static final int PERMISSION_EDIT_POPUP=2;
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -300,7 +298,7 @@ public class WarehouseActivity extends AppCompatActivity {
 
 	}
 
-	void createWarehouse(Context context,String name, String address){
+	void createWarehouse(Context context, String name, String address){
 		if(name.length()==0){
 			Toast.makeText(context, "Tên kho không được trống", Toast.LENGTH_LONG).show();
 			return;

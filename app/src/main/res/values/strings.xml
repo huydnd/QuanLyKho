@@ -4,8 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="dashboard">DASHBOARD</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string
-        name="save_receipt_button">LƯU PHIẾU</string>
+    <string name="save_receipt_button">LƯU PHIẾU</string>
     <string name="warehouse_text">KHO</string>
     <string name="supplies_list_text">DANH SÁCH VẬT TƯ</string>
     <string name="danh_sach_vat_tu_bt">DANH SÁCH VẬT TƯ</string>
@@ -52,7 +51,7 @@
 
     //
     <string name="login_email_hint">Email</string>
-    <string name="login_password_hint">Password</string>
+    <string name="login_password_hint">Mật khẩu</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="thong_ke_so_lieu">THỐNG KÊ SỐ LIỆU</string>
     <string name="xuat_file_bao_cao">XUẤT FILE BÁO CÁO</string>
@@ -83,5 +82,33 @@
     <string name="tra_cuu_google_map">Tra cứu Google Map</string>
     <string name="ngon_ngu">Ngôn ngữ</string>
     <string name="dang_xuat">Đăng xuất</string>
+    <string name="dang_nhap">ĐĂNG NHẬP</string>
+    <string name="dang_ki_ngay">Đăng kí ngay</string>
+    <string name="quen_mat_khau">Quên mật khẩu?</string>
+    <string name="profile_updated">Profile Updated</string>
+    <string name="email_is_changed">Email is changed.</string>
+    <string name="One_or_Many_fields_are_empty">One or Many fields are empty.</string>
+    <string name="Failed">Failed.</string>
+    <string name="Verification_Email_Has_been_Sent">Verification Email Has been Sent.</string>
+    <string name="Reset_Password">Reset Password</string>
+    <string name="Enter_New_Password_more_6_Characters_long">Enter New Password more 6 Characters long.</string>
+    <string name="Password_Reset_Successfully">Password Reset Successfully.</string>
+    <string name="Password_Reset_Failed">Password Reset Failed.</string>
+    <string name="Danh_Sach_Vạt_Tu">DANH SÁCH VẬT TƯ</string>
+    <string name="So_luong_vat_tu">Số lượng vật tư</string>
+    <string name="ten_vat_tu_khong_dươc_de_trong">Tên vật tư không được để trống</string>
+    <string name="Don_vi_khong_duoc_trong">Đơn vị không được trống</string>
+    <string name="Thong_tin_vat_tu_da_ton_tai">Thông tin vật tư đã tồn tại</string>
+    <string name="Chup_tu_camera">Chụp từ Camera</string>
+    <string name="Chon_tu_thu_vien">Chọn từ thư viện</string>
+    <string name="Huy">Hủy</string>
+    <string name="Chon_anh_cho_san_pham_moi">Chọn ảnh cho sản phẩm mới</string>
+    <string name="Chup_tu_Camera">Chụp từ Camera</string>
+    <string name="Chon_Tu_thu_vien">Chọn từ thư viện</string>
+    <string name="huy">Hủy</string>
+    <string name="ten_vat_tu_khong_duoc_trong">Tên vật tư không được trống</string>
+    <string name="don_vi_khong_duoc_trong">Đơn vị không được trống</string>
+    <string name="thong_tin_vat_tu_da_ton_tai">Thông tin vật tư đã tồn tại</string>
+    <string name="Xuat_kho">XUẤT KHO</string>
 
 </resources>

@@ -24,7 +24,7 @@ import java.util.Map;
 public class SuppliesQuery implements DAO.SuppliesQuery{
 	private final SQLiteDatabaseHelper databaseHelper = SQLiteDatabaseHelper.getInstance();
 
-	private DatabaseReference mDatabase= FirebaseDatabase.getInstance("https://warehouse-management-pro-c5dd5-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
+//	private DatabaseReference mDatabase= FirebaseDatabase.getInstance("https://warehouse-management-pro-c5dd5-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
 
 	private ContentValues getContentValuesForsupplies(Supplies supplies){
 		ContentValues contentValues = new ContentValues();
@@ -43,12 +43,12 @@ public class SuppliesQuery implements DAO.SuppliesQuery{
 			if (id > 0) {
 				response.onSuccess(true);
 				supplies.setSuppliesId((int) id);
-				DatabaseReference slRef= mDatabase.child(User.getUId()+"/Supplies/"+String.valueOf(supplies.getSuppliesId()));
-				Map<String,String> slData= new HashMap<String,String>();
-				slData.put("SuppliesName",supplies.getSuppliesName());
-				slData.put("SuppliesUnit",supplies.getSuppliesUnit());
-				slData.put("SuppliesImage", Base64.getEncoder().encodeToString(supplies.getSuppliesImage()));
-				slRef.setValue(slData);
+//				DatabaseReference slRef= mDatabase.child(User.getUId()+"/Supplies/"+String.valueOf(supplies.getSuppliesId()));
+//				Map<String,String> slData= new HashMap<String,String>();
+//				slData.put("SuppliesName",supplies.getSuppliesName());
+//				slData.put("SuppliesUnit",supplies.getSuppliesUnit());
+//				slData.put("SuppliesImage", Base64.getEncoder().encodeToString(supplies.getSuppliesImage()));
+//				slRef.setValue(slData);
 			} else
 				response.onFailure("Không tạo được Vật tư");
 		} catch (SQLiteException e) {
@@ -121,12 +121,12 @@ public class SuppliesQuery implements DAO.SuppliesQuery{
 		if(row>0){
 			response.onSuccess(true);
 			Toast.makeText(App.context, "Xác nhận thay đổi thông tin vật tư", Toast.LENGTH_LONG).show();
-			DatabaseReference slRef= mDatabase.child(User.getUId()+"/Supplies/"+String.valueOf(supplies.getSuppliesId()));
-			Map<String,String> slData= new HashMap<String,String>();
-			slData.put("SuppliesName",supplies.getSuppliesName());
-			slData.put("SuppliesUnit",supplies.getSuppliesUnit());
-			slData.put("SuppliesImage",Base64.getEncoder().encodeToString(supplies.getSuppliesImage()));
-			slRef.setValue(slData);
+//			DatabaseReference slRef= mDatabase.child(User.getUId()+"/Supplies/"+String.valueOf(supplies.getSuppliesId()));
+//			Map<String,String> slData= new HashMap<String,String>();
+//			slData.put("SuppliesName",supplies.getSuppliesName());
+//			slData.put("SuppliesUnit",supplies.getSuppliesUnit());
+//			slData.put("SuppliesImage",Base64.getEncoder().encodeToString(supplies.getSuppliesImage()));
+//			slRef.setValue(slData);
 		}
 		else{
 			response.onFailure("Không thể thay đổi thông tin vật tư");
@@ -141,7 +141,7 @@ public class SuppliesQuery implements DAO.SuppliesQuery{
 		if(row>0){
 			response.onSuccess(true);
 			Toast.makeText(App.context, "Đã xóa vật tư", Toast.LENGTH_LONG).show();
-			mDatabase.child(User.getUId()+"/Supplies/"+String.valueOf(suppliesID)).removeValue();
+//			mDatabase.child(User.getUId()+"/Supplies/"+String.valueOf(suppliesID)).removeValue();
 		}
 		else{
 			response.onFailure("Không thể xóa vật tư này");

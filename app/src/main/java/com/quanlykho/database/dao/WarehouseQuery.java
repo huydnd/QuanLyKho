@@ -31,7 +31,7 @@ import java.util.Map;
 public class WarehouseQuery implements DAO.WarehouseQuery {
 	private final SQLiteDatabaseHelper databaseHelper = SQLiteDatabaseHelper.getInstance();
 
-	private DatabaseReference mDatabase= FirebaseDatabase.getInstance("https://warehouse-management-pro-c5dd5-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
+//	private DatabaseReference mDatabase= FirebaseDatabase.getInstance("https://warehouse-management-pro-c5dd5-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
 
 	private ContentValues getContentValuesForWarehouse(Warehouse warehouse) {
 
@@ -51,11 +51,11 @@ public class WarehouseQuery implements DAO.WarehouseQuery {
 				response.onSuccess(true);
 				warehouse.setWarehouseId((int) id);
 				Toast.makeText(context, "Tạo kho thành công. Mã kho: "+warehouse.getWarehouseId(), Toast.LENGTH_LONG).show();
-				DatabaseReference whRef= mDatabase.child(User.getUId()+"/Warehouse/"+String.valueOf(warehouse.getWarehouseId()));
-				Map<String,String> whData= new HashMap<String,String>();
-				whData.put("WarehouseName",warehouse.getWarehouseName());
-				whData.put("WarehouseAddress",warehouse.getWarehouseAddress());
-				whRef.setValue(whData);
+//				DatabaseReference whRef= mDatabase.child(User.getUId()+"/Warehouse/"+String.valueOf(warehouse.getWarehouseId()));
+//				Map<String,String> whData= new HashMap<String,String>();
+//				whData.put("WarehouseName",warehouse.getWarehouseName());
+//				whData.put("WarehouseAddress",warehouse.getWarehouseAddress());
+//				whRef.setValue(whData);
 			} else
 				response.onFailure("Không thể tạo được nhà kho mới. Vui lòng kiểm tra lại thông tin");
 		} catch (SQLiteException e) {
@@ -263,12 +263,12 @@ public class WarehouseQuery implements DAO.WarehouseQuery {
 		if(row>0){
 			response.onSuccess(true);
 			Toast.makeText(App.context, "Xác nhận thay đổi thông tin nhà kho", Toast.LENGTH_LONG).show();
-			DatabaseReference whRef= mDatabase.child(User.getUId()+"/Warehouse/"+String.valueOf(warehouse.getWarehouseId()));
-
-			Map<String, String> whData = new HashMap<String, String>();
-			whData.put("WarehouseName",warehouse.getWarehouseName());
-			whData.put("WarehouseAddress",warehouse.getWarehouseAddress());
-			whRef.setValue(whData);
+//			DatabaseReference whRef= mDatabase.child(User.getUId()+"/Warehouse/"+String.valueOf(warehouse.getWarehouseId()));
+//
+//			Map<String, String> whData = new HashMap<String, String>();
+//			whData.put("WarehouseName",warehouse.getWarehouseName());
+//			whData.put("WarehouseAddress",warehouse.getWarehouseAddress());
+//			whRef.setValue(whData);
 
 		}
 		else{
@@ -284,8 +284,8 @@ public class WarehouseQuery implements DAO.WarehouseQuery {
 		if(row>0){
 			response.onSuccess(true);
 			Toast.makeText(App.context, "Đã xóa kho", Toast.LENGTH_LONG).show();
-
-			mDatabase.child(User.getUId()+"/Warehouse/"+String.valueOf(WarehouseID)).removeValue();
+//
+//			mDatabase.child(User.getUId()+"/Warehouse/"+String.valueOf(WarehouseID)).removeValue();
 		}
 		else{
 			response.onFailure("Không thể xóa kho này");

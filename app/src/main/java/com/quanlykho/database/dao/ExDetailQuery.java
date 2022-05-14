@@ -20,8 +20,6 @@ public class ExDetailQuery implements DAO.ExDetailQuery {
 
 	private final SQLiteDatabaseHelper databaseHelper = SQLiteDatabaseHelper.getInstance();
 
-	private DatabaseReference mDatabase= FirebaseDatabase.getInstance("https://warehouse-management-pro-c5dd5-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
-
 	@Override
 	public void createExDetail(ExDetail exDetail, QueryResponse<Boolean> response) {
 		try (android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase()) {
@@ -29,9 +27,6 @@ public class ExDetailQuery implements DAO.ExDetailQuery {
 					"VALUES(" + exDetail.getExDetailSuppliesId() + "," + exDetail.getExDetailExportId() + "," + exDetail.getExDetailAmount() + ");";
 			sqLiteDatabase.execSQL(query);
 			response.onSuccess(true);
-
-			DatabaseReference edRef= mDatabase.child(User.getUId()+"/ExDetail/"+String.valueOf(exDetail.getExDetailExportId())+"/"+exDetail.getExDetailSuppliesId()+"/ExDetailAmount");
-			edRef.setValue(exDetail.getExDetailAmount());
 
 		} catch (SQLiteException e) {
 			Log.d("TESTDETAIL","INSERT: FAIL CMNR "+e);
@@ -110,7 +105,6 @@ public class ExDetailQuery implements DAO.ExDetailQuery {
 		try (android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase()) {
 			String query = "DELETE FROM ExDetail WHERE ExDetail.ExDetail_ExportId=" + exportId + ";";
 			sqLiteDatabase.execSQL(query);
-			mDatabase.child(User.getUId()+"/ExDetail/"+String.valueOf(exportId)).removeValue();
 
 			response.onSuccess(true);
 		}catch (SQLiteException e){

@@ -207,7 +207,7 @@ public class ReceiptActivity extends AppCompatActivity {
 								}
 							});
 						}
-						Intent intent = getIntent();
+						Intent intent = new Intent(ReceiptActivity.this,ReceiptHistoryActivity.class);
 						finish();
 						startActivity(intent);
 					}

@@ -26,8 +26,6 @@ public class DetailQuery implements DAO.DetailQuery{
 
 	private final SQLiteDatabaseHelper databaseHelper = SQLiteDatabaseHelper.getInstance();
 
-	private DatabaseReference mDatabase= FirebaseDatabase.getInstance("https://warehouse-management-pro-c5dd5-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
-
 	@Override
 	public void createDetail(Detail detail, QueryResponse<Boolean> response) {
 		try (android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase()) {
@@ -35,10 +33,6 @@ public class DetailQuery implements DAO.DetailQuery{
 					"VALUES(" + detail.getDetailSuppliesId() + "," + detail.getDetailReceiptId() + "," + detail.getDetailAmount() + ");";
 			sqLiteDatabase.execSQL(query);
 			response.onSuccess(true);
-
-			DatabaseReference dtRef= mDatabase.child(User.getUId()+"/Detail/"+String.valueOf(detail.getDetailReceiptId())+"/"+detail.getDetailSuppliesId()+"/DetailAmount");
-			dtRef.setValue(detail.getDetailAmount());
-
 
 		} catch (SQLiteException e) {
 			Log.d("TESTDETAIL","INSERT: FAIL CMNR "+e);
@@ -67,7 +61,6 @@ public class DetailQuery implements DAO.DetailQuery{
 		try (android.database.sqlite.SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase()) {
 			String query = "DELETE FROM Detail WHERE Detail.Detail_ReceiptId= " + receiptId + ";";
 			sqLiteDatabase.execSQL(query);
-			mDatabase.child(User.getUId()+"/Detail/"+String.valueOf(receiptId)).removeValue();
 			response.onSuccess(true);
 		}catch (SQLiteException e){
 			response.onFailure("Không thể xóa");

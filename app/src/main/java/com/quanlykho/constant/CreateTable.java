@@ -32,6 +32,7 @@ public class CreateTable {
 					Constants.EXPORT_ID+ " INTEGER NOT NULL UNIQUE,"+
 					Constants.EXPORT_WAREHOUSE_ID+	" INTEGER NOT NULL,"+
 					Constants.EXPORT_DATE+	" INTEGER NOT NULL,"+
+					Constants.EXPORT_ADDRESS+ " TEXT,"+
 					"FOREIGN KEY (" + Constants.EXPORT_WAREHOUSE_ID + ") REFERENCES "+ Constants.WAREHOUSE_TABLE + "(" +Constants.WAREHOUSE_ID+ ") ON UPDATE CASCADE,"+
 					"PRIMARY KEY("+Constants.EXPORT_ID+" AUTOINCREMENT)"+
 					")";
