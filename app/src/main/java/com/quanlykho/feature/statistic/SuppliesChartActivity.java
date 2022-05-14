@@ -69,7 +69,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SuppliesChartActivity extends BaseChartActivity implements SeekBar.OnSeekBarChangeListener, OnChartValueSelectedListener {
+public class SuppliesChartActivity extends BaseChartActivity implements OnChartValueSelectedListener {
 
 
 	private DrawerLayout drawerLayout;
@@ -77,8 +77,6 @@ public class SuppliesChartActivity extends BaseChartActivity implements SeekBar.
 
 	private AutoCompleteTextView warehouseNameDropdown, suppliesNameDropdown;
 	private BarChart barChart;
-	private SeekBar seekBarX, seekBarY;
-	private TextView tvX, tvY;
 	private ArrayList<Supplies> suppliesArrayList = new ArrayList<Supplies>();
 	private ArrayList<String> suppliesNameList = new ArrayList<String>();
 	private ArrayList<Warehouse> warehouseArrayList = new ArrayList<Warehouse>();
@@ -99,7 +97,7 @@ public class SuppliesChartActivity extends BaseChartActivity implements SeekBar.
 		setContentView(R.layout.activity_supplies_chart);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeAsUpIndicator(getDrawable(R.drawable.ic_baseline_menu_48));
-		getSupportActionBar().setTitle("Biểu đồ vật tư");
+		getSupportActionBar().setTitle(R.string.suppies_chart);
 		setControl();
 		setEvent();
 		//đọc dữ liệu
@@ -144,23 +142,22 @@ public class SuppliesChartActivity extends BaseChartActivity implements SeekBar.
 			}
 		});
 
-		seekBarY.setOnSeekBarChangeListener(this);
-		seekBarX.setOnSeekBarChangeListener(this);
+		barChart.setOnChartValueSelectedListener(this);
 		barChart.setDrawBarShadow(false);
 		barChart.setDrawValueAboveBar(false);
 		barChart.getDescription().setEnabled(false);
 
 		// if more than 60 entries are displayed in the chart, no values will be
 		// drawn
-		barChart.setMaxVisibleValueCount(60);
+		barChart.setMaxVisibleValueCount(10);
 
 		// scaling can now only be done on x- and y-axis separately
-		barChart.setPinchZoom(false);
+		barChart.setPinchZoom(true);
 
 		// draw shadows for each bar that show the maximum value
 		// chart.setDrawBarShadow(true);
 
-		barChart.setDrawGridBackground(false);
+		barChart.setDrawGridBackground(true);
 //
 
 		XAxis xAxis = barChart.getXAxis();
@@ -192,13 +189,9 @@ public class SuppliesChartActivity extends BaseChartActivity implements SeekBar.
 		l.setTextSize(11f);
 		l.setXEntrySpace(4f);
 
-		// setting data
-		seekBarY.setProgress(50);
-		seekBarX.setProgress(12);
-
 	}
 
-	private void setData(int count, float range, ArrayList<SuppliesByDate> suppliesByDateArrayList) throws ParseException {
+	private void setData(ArrayList<SuppliesByDate> suppliesByDateArrayList) throws ParseException {
 
 		ArrayList<BarEntry> values = new ArrayList<>();
 		ArrayList<String> xAxisValues = new ArrayList<String>();
@@ -297,7 +290,6 @@ public class SuppliesChartActivity extends BaseChartActivity implements SeekBar.
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-
 		switch (item.getItemId()) {
 			case android.R.id.home:
 				drawerLayout.openDrawer(Gravity.LEFT);
@@ -345,36 +337,11 @@ public class SuppliesChartActivity extends BaseChartActivity implements SeekBar.
 		return true;
 	}
 
-	@Override
-	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-		tvX.setText(String.valueOf(seekBarX.getProgress()));
-		tvY.setText(String.valueOf(seekBarY.getProgress()));
-
-		try {
-			setData(seekBarX.getProgress(), seekBarY.getProgress(), suppliesByDateArrayList);
-		} catch (ParseException exception) {
-			exception.printStackTrace();
-		}
-		barChart.setFitBars(true);
-		barChart.invalidate();
-	}
-
-	@Override
-	public void onStartTrackingTouch(SeekBar seekBar) {
-
-	}
-
-	@Override
-	public void onStopTrackingTouch(SeekBar seekBar) {
-
-	}
-
 	private final RectF mOnValueSelectedRectF = new RectF();
 
 	@Override
 	protected void saveToGallery() {
-		saveToGallery(barChart, "Biểu đồ nhập vật tư theo ngày");
+		saveToGallery(barChart, getString(R.string.supplies_import_chart_by_day));
 	}
 
 	@Override
@@ -404,10 +371,6 @@ public class SuppliesChartActivity extends BaseChartActivity implements SeekBar.
 		warehouseNameDropdown = findViewById(R.id.warehouseNameDropdown_ChartActivity);
 		suppliesNameDropdown = findViewById(R.id.suppliesNameDropdown);
 		barChart = findViewById(R.id.supplieschart);
-		tvX = findViewById(R.id.tvXMax);
-		tvY = findViewById(R.id.tvYMax);
-		seekBarX = findViewById(R.id.seekBar1);
-		seekBarY = findViewById(R.id.seekBar2);
 		drawerLayout = findViewById(R.id.activity_chart_supplies);
 		navigationView = findViewById(R.id.navigationView);
 
@@ -469,7 +432,7 @@ public class SuppliesChartActivity extends BaseChartActivity implements SeekBar.
 							}
 							suppliesByDateArrayList.addAll(data);
 							try {
-								setData(seekBarX.getProgress(), seekBarY.getProgress(), suppliesByDateArrayList);
+								setData(suppliesByDateArrayList);
 							} catch (ParseException exception) {
 								exception.printStackTrace();
 							}
@@ -497,7 +460,7 @@ public class SuppliesChartActivity extends BaseChartActivity implements SeekBar.
 							}
 							suppliesByDateArrayList.addAll(data);
 							try {
-								setData(seekBarX.getProgress(), seekBarY.getProgress(), suppliesByDateArrayList);
+								setData(suppliesByDateArrayList);
 							} catch (ParseException exception) {
 								exception.printStackTrace();
 							}

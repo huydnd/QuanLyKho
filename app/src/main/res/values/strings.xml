@@ -110,5 +110,7 @@
     <string name="don_vi_khong_duoc_trong">Đơn vị không được trống</string>
     <string name="thong_tin_vat_tu_da_ton_tai">Thông tin vật tư đã tồn tại</string>
     <string name="Xuat_kho">XUẤT KHO</string>
+    <string name="supplies_import_chart_by_day">Biểu đồ nhập vật tư theo ngày</string>
+    <string name="suppies_chart">Biểu đồ vật tư</string>
 
 </resources>

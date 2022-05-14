@@ -75,7 +75,6 @@ public class ExportQuery implements DAO.ExportQuery{
 			if(cursor.moveToFirst()) {
 				do {
 					Export export= new Export();
-
 					export.setExportId(cursor.getInt(cursor.getColumnIndexOrThrow(Constants.EXPORT_ID)));;
 					export.setExportWarehouseId(cursor.getInt(cursor.getColumnIndexOrThrow(Constants.EXPORT_WAREHOUSE_ID)));
 					export.setExportDate(cursor.getString(cursor.getColumnIndexOrThrow(Constants.EXPORT_DATE)));
@@ -110,7 +109,6 @@ public class ExportQuery implements DAO.ExportQuery{
 			if(cursor.moveToFirst()) {
 				do {
 					Export export = new Export();
-
 					export.setExportId(cursor.getInt(cursor.getColumnIndexOrThrow(Constants.EXPORT_ID)));;
 					export.setExportWarehouseId(cursor.getInt(cursor.getColumnIndexOrThrow(Constants.EXPORT_WAREHOUSE_ID)));
 					export.setExportDate(cursor.getString(cursor.getColumnIndexOrThrow(Constants.EXPORT_DATE)));
